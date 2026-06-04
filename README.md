@@ -19,6 +19,10 @@ signals:
   forecast_2hr: Partly Cloudy
 ```
 
+## Demo
+
+![Jogging in Bedok — Claude Desktop](public/demo-claude-desktop.png)
+
 ## Tools
 
 ### `should_i_jog_now(area)`
