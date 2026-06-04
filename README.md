@@ -21,7 +21,7 @@ signals:
 
 ## Demo
 
-![Jogging in Bedok — Claude Desktop](public/demo-claude-desktop.png)
+![Jogging in Bedok — Claude Desktop](public/sg-life-mcp-demo.png)
 
 ## Tools
 
