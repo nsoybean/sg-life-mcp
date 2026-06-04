@@ -151,20 +151,25 @@ class RainfallResponse(_CamelModel):
 
 # ── 2-Hour Forecast ───────────────────────────────────────────────────────────
 
-class ForecastArea(_CamelModel):
+class ForecastAreaMetadata(_CamelModel):
     name: str
-    forecast: str
     label_location: LabelLocation
+
+
+class ForecastArea(BaseModel):
+    area: str
+    forecast: str
 
 
 class ForecastItem(_CamelModel):
     update_timestamp: datetime
     timestamp: datetime
-    valid_period: dict              # {start, end} ISO strings
+    valid_period: dict              # {start, end, text}
     forecasts: list[ForecastArea]
 
 
 class ForecastData(BaseModel):
+    area_metadata: list[ForecastAreaMetadata]
     items: list[ForecastItem]
 
 

@@ -126,7 +126,7 @@ def find_area_forecast(forecast_raw: ForecastResponse, area: str) -> str | None:
     area_lower = area.lower()
     try:
         for f in forecast_raw.data.items[0].forecasts:
-            if area_lower in f.name.lower():
+            if area_lower in f.area.lower():
                 return f.forecast
     except IndexError:
         pass
@@ -255,7 +255,7 @@ async def should_i_jog_now(area: str = "Bedok") -> str:
             if not raining:  # avoid double-counting
                 issues.append(f"Forecast: {forecast}")
     else:
-        signals["forecast_2hr"] = "unavailable"
+        signals["weather_forecast_2hr"] = "unavailable"
 
     # ── verdict ─────────────────────────────────────────────────────────────────────────
     blockers = [i for i in issues if any(
