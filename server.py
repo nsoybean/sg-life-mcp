@@ -175,8 +175,10 @@ async def should_i_jog_now(area: str = "Bedok") -> str:
             psi = psi_raw.data.items[0].readings.psi_twenty_four_hourly.get(region)
             signals["psi"] = psi
             if psi is not None:
+                if psi > 200:
+                    issues.append(f"PSI {psi} — very unhealthy air")
                 if psi > 100:
-                    issues.append(f"PSI {psi} — unhealthy air (limit: 100)")
+                    issues.append(f"PSI {psi} — unhealthy air")
                 elif psi > 55:
                     issues.append(f"PSI {psi} — moderate air quality")
         except IndexError:
