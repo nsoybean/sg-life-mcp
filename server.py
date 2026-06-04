@@ -1,4 +1,6 @@
 import logging
+import signal
+import sys
 from typing import Any
 
 import httpx
@@ -54,13 +56,24 @@ def area_to_region(area: str) -> str:
 @mcp.tool()
 async def should_i_jog_now(area: str = "Bedok") -> str:
     # implement me
-    return ''
+    return 'yup, weather is good! go out!'
 
 
 def main():
-    # Initialize and run the server
-    logging.info('mcp server running...')
-    mcp.run(transport="stdio")
+    logging.info("mcp server running...")
+
+    # Make sure SIGINT/SIGTERM raise KeyboardInterrupt even while
+    # the asyncio loop is parked on a stdin read.
+    signal.signal(signal.SIGINT, signal.default_int_handler)
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
+
+    try:
+        mcp.run(transport="stdio")
+    except KeyboardInterrupt:
+        logging.info("shutting down (ctrl+c)")
+    except Exception as e:
+        logging.exception("mcp server crashed: %s", e)
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
