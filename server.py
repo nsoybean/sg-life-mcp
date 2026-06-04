@@ -249,7 +249,7 @@ async def should_i_jog_now(area: str = "Bedok") -> str:
         forecast = find_area_forecast(forecast_raw, area)
         if forecast is None:
             forecast = "forecast area not found"
-        signals["forecast_2hr"] = forecast
+        signals["weather_forecast_2hr"] = forecast
         forecast_lower = (forecast or "").lower()
         if any(w in forecast_lower for w in ["heavy rain", "thundery", "showers"]):
             if not raining:  # avoid double-counting
