@@ -45,7 +45,7 @@ AREA_COORDS: dict[str, tuple[float, float]] = {
     "sembawang":  (1.4491, 103.8185),
     "admiralty":  (1.4404, 103.8008),
     "canberra":   (1.4432, 103.8301),
-    # central
+    # central .
     "bishan":     (1.3520, 103.8480),
     "toa payoh":  (1.3340, 103.8470),
     "ang mo kio": (1.3691, 103.8454),
