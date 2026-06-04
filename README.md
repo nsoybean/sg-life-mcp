@@ -57,15 +57,20 @@ python server.py --test
 ```json
 {
   "mcpServers": {
-    "sg-life": {
-      "command": "/full/path/to/.venv/bin/python",
-      "args": ["/full/path/to/server.py"]
+    "weather": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/ABSOLUTE/PATH/TO/PARENT/FOLDER/sg-life-mcp",
+        "run",
+        "server.py"
+      ]
     }
   }
 }
 ```
 
-Fully quit and reopen Claude Desktop after editing the config. Ask: _"Should I jog now in Tampines?"_
+Fully quit and reopen Claude Desktop after editing the config. Ask: _"Should I jog now in Bedok?"_
 
 **View logs:**
 
@@ -85,6 +90,7 @@ All data from [data.gov.sg](https://data.gov.sg) real-time APIs — no API key r
 
 ## Roadmap
 
+- [x] `should_i_jog_now` — if you should jog now given current weather conditions
 - [ ] `best_run_window_today` — scan today's forecast and rank time slots
 - [ ] `morning_brief` — all signals in a 5-line daily digest
 - [ ] `safe_for_kids_outside` — PSI + dengue clusters + UV
