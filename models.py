@@ -177,3 +177,81 @@ class ForecastResponse(_CamelModel):
     code: int
     data: ForecastData
     error_msg: str | None
+
+
+# ── 24-Hour Forecast ──────────────────────────────────────────────────────────
+
+class WeatherText(_CamelModel):
+    text: str
+    code: str
+
+
+class TimePeriod(_CamelModel):
+    start: datetime
+    end: datetime
+    text: str
+
+
+class TwentyFourHrGeneral(_CamelModel):
+    valid_period: TimePeriod
+    temperature: dict
+    forecast: WeatherText
+    wind: dict
+    relative_humidity: dict
+
+
+class TwentyFourHrPeriod(_CamelModel):
+    time_period: TimePeriod
+    regions: dict[str, WeatherText]
+
+
+class TwentyFourHrRecord(_CamelModel):
+    date: date
+    updated_timestamp: datetime
+    timestamp: datetime | None = None
+    general: TwentyFourHrGeneral
+    periods: list[TwentyFourHrPeriod]
+
+
+class TwentyFourHrData(_CamelModel):
+    records: list[TwentyFourHrRecord]
+
+
+class TwentyFourHrForecastResponse(_CamelModel):
+    code: int
+    data: TwentyFourHrData
+    error_msg: str | None
+
+
+# ── Four-Day Outlook ──────────────────────────────────────────────────────────
+
+class OutlookForecastText(_CamelModel):
+    text: str
+    code: str
+    summary: str | None = None
+
+
+class OutlookDayForecast(_CamelModel):
+    day: str
+    timestamp: datetime
+    temperature: dict
+    relative_humidity: dict
+    wind: dict
+    forecast: OutlookForecastText
+
+
+class FourDayOutlookRecord(_CamelModel):
+    date: date
+    updated_timestamp: datetime
+    timestamp: datetime | None = None
+    forecasts: list[OutlookDayForecast]
+
+
+class FourDayOutlookData(_CamelModel):
+    records: list[FourDayOutlookRecord]
+
+
+class FourDayOutlookResponse(_CamelModel):
+    code: int
+    data: FourDayOutlookData
+    error_msg: str | None

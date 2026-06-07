@@ -39,6 +39,20 @@ Combines 5 real-time signals to decide if it's safe to run outside:
 
 Returns `GO`, `CAUTION`, or `SKIP` with a reason.
 
+### `hang_laundry_outside(area)`
+
+Combines current and forecast signals for outdoor laundry:
+
+| Signal           | Source       | Blocks if                    |
+| ---------------- | ------------ | ---------------------------- |
+| Rainfall         | NEA stations | rain detected                |
+| 2hr forecast     | NEA          | showers / thundery           |
+| 24hr forecast    | NEA          | rain periods today           |
+| 4-day outlook    | NEA          | showers / thundery ahead     |
+| Humidity / wind  | NEA          | humidity ≥ 90% slows drying  |
+
+Returns `verdict_now` plus ranked windows for today and the next four days.
+
 ## Setup
 
 **Requirements:** Python 3.10+, [uv](https://docs.astral.sh/uv/)
@@ -91,11 +105,13 @@ All data from [data.gov.sg](https://data.gov.sg) real-time APIs — no API key r
 - NEA UV index: `api-open.data.gov.sg/v2/real-time/api/uv-index`
 - NEA Rainfall: `api-open.data.gov.sg/v2/real-time/api/rainfall`
 - NEA 2hr forecast: `api-open.data.gov.sg/v2/real-time/api/two-hr-forecast`
+- NEA 24hr forecast: `api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast`
+- NEA 4-day outlook: `api-open.data.gov.sg/v2/real-time/api/four-day-outlook`
 
 ## Roadmap
 
 - [x] `should_i_jog_now` — if you should jog now given current weather conditions
+- [x] `hang_laundry_outside` — rainfall + wind + 4-day forecast
 - [ ] `best_run_window_today` — scan today's forecast and rank time slots
 - [ ] `morning_brief` — all signals in a 5-line daily digest
 - [ ] `safe_for_kids_outside` — PSI + dengue clusters + UV
-- [ ] `hang_laundry_outside` — rainfall + wind + 4-day forecast
